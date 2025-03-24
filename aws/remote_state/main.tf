@@ -9,8 +9,7 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 terraform {
-
-  required_providers {
+    required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
@@ -18,7 +17,18 @@ terraform {
   }
 
   required_version = ">= 1.11.2"
+
+backend "s3" {
+    encrypt = true
+  }
+
 }
+
+bucket  = "588738580614-terraform-states"
+key     = "development/service-name.tfstate"
+encrypt = true
+region  = "ap-south-1"
+dynamodb_table = "terraform-lock"
 
 # ------------------------------------------------------------------------------
 # CONFIGURE OUR AWS CONNECTION
